@@ -1,0 +1,117 @@
+
+	*========================================*
+	|>	  MySQL Database tables details:    <|
+	*========================================*
+ 
+	  +------------------------------------+
+	  | Tables_in_tender_management_system |
+	  +------------------------------------+
+	  | administrator                      |
+	  | bids                               |
+	  | tenders                            |
+	  | vendor                             |
+	  | vendor_tender                      |
+	  +------------------------------------+
+ 
+ 
+ > desc administrator;
++----------+-------------+------+-----+---------+-------+
+| Field    | Type        | Null | Key | Default | Extra |
++----------+-------------+------+-----+---------+-------+
+| id       | int         | NO   | PRI | NULL    |       |
+| name     | varchar(20) | YES  |     | NULL    |       |
+| dob      | date        | YES  |     | NULL    |       |
+| email    | varchar(20) | YES  | UNI | NULL    |       |
+| password | varchar(15) | YES  |     | NULL    |       |
++----------+-------------+------+-----+---------+-------+
+ 
+ 
+ > desc vendor;
++--------------+-------------+------+-----+---------+----------------+
+| Field        | Type        | Null | Key | Default | Extra          |
++--------------+-------------+------+-----+---------+----------------+
+| id           | int         | NO   | PRI | NULL    | auto_increment |
+| vname        | varchar(20) | YES  |     | NULL    |                |
+| GST_no       | int         | YES  | UNI | NULL    |                |
+| edate        | date        | YES  |     | NULL    |                |
+| email        | varchar(20) | YES  | UNI | NULL    |                |
+| password     | varchar(15) | YES  |     | NULL    |                |
+| signature_id | int         | YES  | MUL | NULL    |                |
++--------------+-------------+------+-----+---------+----------------+
+ 
+ 
+ > desc tenders;
++------------+-------------+------+-----+---------+-------+
+| Field      | Type        | Null | Key | Default | Extra |
++------------+-------------+------+-----+---------+-------+
+| tender_Id  | int         | NO   | PRI | NULL    |       |
+| flat_type  | varchar(20) | YES  |     | NULL    |       |
+| base_price | int         | YES  |     | NULL    |       |
+| furniture  | varchar(20) | YES  |     | NULL    |       |
+| location   | varchar(20) | YES  |     | NULL    |       |
+| s_date     | date        | YES  |     | NULL    |       |
+| e_date     | date        | YES  |     | NULL    |       |
++------------+-------------+------+-----+---------+-------+
+ 
+ 
+> desc bids;
++---------------+-------------+------+-----+---------+----------------+
+| Field         | Type        | Null | Key | Default | Extra          |
++---------------+-------------+------+-----+---------+----------------+
+| bid_no        | int         | NO   | PRI | NULL    | auto_increment |
+| offer_price   | int         | YES  |     | NULL    |                |
+| bid_tender    | int         | YES  | MUL | NULL    |                |
+| vendor_id     | int         | YES  | MUL | NULL    |                |
+| status_of_bid | varchar(15) | YES  |     | NULL    |                |
++---------------+-------------+------+-----+---------+----------------+
+
+> desc vendor_tender;
++-----------------------+------+------+-----+---------+-------+
+| Field                 | Type | Null | Key | Default | Extra |
++-----------------------+------+------+-----+---------+-------+
+| id                    | int  | YES  | MUL | NULL    |       |
+| tender_Id             | int  | YES  | MUL | NULL    |       |
+| highest_offered_price | int  | YES  |     | NULL    |       |
++-----------------------+------+------+-----+---------+-------+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
