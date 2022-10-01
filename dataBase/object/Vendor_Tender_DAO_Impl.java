@@ -54,7 +54,9 @@ public class Vendor_Tender_DAO_Impl implements Vendor_Tender_DAO {
 							
 							PreparedStatement ps3 = conn.prepareStatement("select v.id, v.vname, v.GST_no, v.edate, v.email, t.tender_Id, t.flat_type,"
 									+ " t.base_price,vt.highest_offered_price, t.furniture, t.location, t.s_date, t.e_date from vendor v INNER JOIN tenders t"
-									+ " INNER JOIN vendor_tender vt ON v.id = vt.id AND t.tender_Id = vt.tender_Id");
+									+ " INNER JOIN vendor_tender vt ON v.id = vt.id AND t.tender_Id = vt.tender_Id AND v.id = ?");
+							
+							ps3.setInt(1, vendorId);
 							
 							ResultSet rs2 = ps3.executeQuery();
 							
