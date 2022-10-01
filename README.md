@@ -12,11 +12,12 @@ Topics for the Application:
 
 Attention areas:
 ------------------------------------------------------
--Core Java-
+Core Java: 
 ● Basic Oops concept
 ● Exception handling
 ● Collection framework
--SQL-
+
+SQL: 
 ● Basic SQL
 ● Table relationships
 ● Joins
