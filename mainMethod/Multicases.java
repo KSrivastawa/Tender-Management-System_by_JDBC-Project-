@@ -311,7 +311,7 @@ public class Multicases {
 				}// wi
 				
 			 }// if
-		   
+		   Multicases.main(args);
 			
 		case 2:
 			System.out.println("Welcome to Vendor Login\n");
@@ -477,7 +477,7 @@ public class Multicases {
 				
 			 }//if
 			
-			
+			Multicases.main(args);
 		}//msw
 		
 		sc.close();
