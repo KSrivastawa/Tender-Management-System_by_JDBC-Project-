@@ -21,7 +21,7 @@ public class DataBaseUtility {
 		String url = "jdbc:mysql://localhost:3306/tender_management_system";
 		
 		try {
-			conn = DriverManager.getConnection(url,"root","Prashant@20");
+			conn = DriverManager.getConnection(url,"root","***********");  // (***********) -> your mysql command line password
 
 		} catch (SQLException e) {
 			e.printStackTrace();
