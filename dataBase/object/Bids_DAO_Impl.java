@@ -53,7 +53,24 @@ public class Bids_DAO_Impl implements Bids_DAO {
 				
 				
 			}else {
-				throw new BidInsertException("Bid data error...\n"+status);
+				try(Connection conn1 = DataBaseUtility.provideTenderConnection()){
+				PreparedStatement ps3 = conn.prepareStatement("insert into bids(offer_price, bid_tender, vendor_id, status_of_bid) "
+						+ "values(?,?,?,?)");
+				
+				ps3.setInt(1, offerPrice);
+				ps3.setInt(2, bid_tender);
+				ps3.setInt(3, bid_vendor);
+				ps3.setString(4, bid_status);
+				
+				int x = ps3.executeUpdate();
+				
+				if(x>0)
+					status = "Bid placed against tender successfully...\n";
+				else
+					throw new BidInsertException("Technical error...\n"+status);
+				}catch (SQLException e) {
+					throw new BidInsertException("Bid data error...\n"+status);
+				}
 			}
 			
 			
