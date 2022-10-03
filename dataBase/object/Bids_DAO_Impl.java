@@ -18,65 +18,89 @@ public class Bids_DAO_Impl implements Bids_DAO {
 		
 		String status = "Not Inserted";
 		
-		try(Connection conn = DataBaseUtility.provideTenderConnection()) {
+		try(Connection conn = DataBaseUtility.provideTenderConnection()){
 			
-			PreparedStatement ps = conn.prepareStatement("select count(bid_no) from bids group by bid_tender having bid_tender = ?");
+			PreparedStatement ps = conn.prepareStatement("select * from bids where bid_tender = ? AND vendor_id = ?");
 			
 			ps.setInt(1, bid_tender);
+			ps.setInt(2, bid_vendor);
 			
-			ResultSet rs = ps.executeQuery();
+			ResultSet rst = ps.executeQuery();
 			
-			if(rs.next()) {
+			if(rst.next()) {
 				
-				int count  = rs.getInt("count(bid_no)");
-				
-				if(count < 3) {
-					
-					PreparedStatement ps2 = conn.prepareStatement("insert into bids(offer_price, bid_tender, vendor_id, status_of_bid) "
-							+ "values(?,?,?,?)");
-					
-					ps2.setInt(1, offerPrice);
-					ps2.setInt(2, bid_tender);
-					ps2.setInt(3, bid_vendor);
-					ps2.setString(4, bid_status);
-					
-					int x = ps2.executeUpdate();
-					
-					if(x>0)
-						status = "Bid placed against tender successfully...\n";
-					else
-						throw new BidInsertException("Technical error...\n"+status);
-					
-				}else {
-					throw new BidInsertException("Bid limit Exceeded...\n"+status);
-				}
-				
+				status = "unable to bid again, you can bid only once against each tender...";
 				
 			}else {
-				try(Connection conn1 = DataBaseUtility.provideTenderConnection()){
-				PreparedStatement ps3 = conn.prepareStatement("insert into bids(offer_price, bid_tender, vendor_id, status_of_bid) "
-						+ "values(?,?,?,?)");
 				
-				ps3.setInt(1, offerPrice);
-				ps3.setInt(2, bid_tender);
-				ps3.setInt(3, bid_vendor);
-				ps3.setString(4, bid_status);
-				
-				int x = ps3.executeUpdate();
-				
-				if(x>0)
-					status = "Bid placed against tender successfully...\n";
-				else
-					throw new BidInsertException("Technical error...\n"+status);
-				}catch (SQLException e) {
-					throw new BidInsertException("Bid data error...\n"+status);
+
+				try(Connection conn11 = DataBaseUtility.provideTenderConnection()) {
+					
+					PreparedStatement ps1 = conn11.prepareStatement("select count(bid_no) from bids group by bid_tender having bid_tender = ?");
+					
+					ps1.setInt(1, bid_tender);
+					
+					ResultSet rs1 = ps1.executeQuery();
+					
+					if(rs1.next()) {
+						
+						int count  = rs1.getInt("count(bid_no)");
+						
+						if(count < 3) {
+							
+							PreparedStatement ps2 = conn.prepareStatement("insert into bids(offer_price, bid_tender, vendor_id, status_of_bid) "
+									+ "values(?,?,?,?)");
+							
+							ps2.setInt(1, offerPrice);
+							ps2.setInt(2, bid_tender);
+							ps2.setInt(3, bid_vendor);
+							ps2.setString(4, bid_status);
+							
+							int x = ps2.executeUpdate();
+							
+							if(x>0)
+								status = "Bid placed against tender successfully...\n";
+							else
+								throw new BidInsertException("Technical error...\n"+status);
+							
+						}else {
+							throw new BidInsertException("Bid limit Exceeded...\n"+status);
+						}
+						
+						
+					}else {
+						try(Connection conn1 = DataBaseUtility.provideTenderConnection()){
+							PreparedStatement ps3 = conn.prepareStatement("insert into bids(offer_price, bid_tender, vendor_id, status_of_bid) "
+									+ "values(?,?,?,?)");
+							
+							ps3.setInt(1, offerPrice);
+							ps3.setInt(2, bid_tender);
+							ps3.setInt(3, bid_vendor);
+							ps3.setString(4, bid_status);
+							
+							int x = ps3.executeUpdate();
+							
+							if(x>0)
+								status = "Bid placed against tender successfully...\n";
+							else
+								throw new BidInsertException("Technical error...\n"+status);
+							}catch (SQLException e) {
+								throw new BidInsertException("Bid data error...\n"+status);
+							}
+					}
+					
+					
+				} catch (SQLException e) {
+					throw new BidInsertException(e.getMessage());
 				}
 			}
 			
 			
-		} catch (SQLException e) {
-			throw new BidInsertException(e.getMessage());
+		}catch (SQLException e) {
+			System.out.println(e.getMessage());
 		}
+		
+		
 		
 		
 		return status;
