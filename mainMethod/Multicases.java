@@ -1,5 +1,6 @@
 package com.ketan.mainMethod;
 
+import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
@@ -32,15 +33,22 @@ public class Multicases {
 		System.out.println("  | Welcome to ~~'Tender Management System'~~ |");
 		System.out.println("  *===========================================*\n");
 		
-		System.out.println(" 1. Administrator login\n"
-				+ " 2. Vendor login\n");
+		System.out.println(" 1. Administrator Signup\n"
+						+" 2. Administrator login\n"
+						+ " 3. Vendor login\n");
 		
+	try {
+			
 		System.out.println("Enter Choice:");
 		int choice = sc.nextInt();
 		
 		switch(choice) {
-			
+		
 		case 1:
+			RegisterAdminCase.main(args);
+			
+			Multicases.main(args);
+		case 2:
 			System.out.println("Welcome to Admin login\n");
 			
 			System.out.println("Enter username:");
@@ -306,14 +314,15 @@ public class Multicases {
 					System.out.println("Thankyou!\n");
 					Multicases.main(args);
 					
-				}// sw
+				}// 1 nested switch
 				
-				}// wi
+				}// while
 				
 			 }// if
-		   Multicases.main(args);
 			
-		case 2:
+			Multicases.main(args);
+			
+		case 3:
 			System.out.println("Welcome to Vendor Login\n");
 			
 			System.out.println("Enter username:");
@@ -471,14 +480,28 @@ public class Multicases {
 					System.out.println("Thankyou!\n");
 					Multicases.main(args);
 				
-				}//sw
+				}// 2 nested switch
 				
-			   }//wi
+			   }//while
 				
 			 }//if
 			
 			Multicases.main(args);
-		}//msw
+			
+		default:
+	
+			System.out.println("choice is out of range... Enter valid choice!\n");
+				
+			Multicases.main(args);
+			
+		}//main switch
+		
+	}catch(InputMismatchException e) {
+			
+		System.out.println("Incorrect input... it should be in number!\n");
+			
+		Multicases.main(args);
+	}
 		
 		sc.close();
 
