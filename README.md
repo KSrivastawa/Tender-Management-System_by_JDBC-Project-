@@ -1,4 +1,4 @@
-# Tender-Management-System_Using_JDBC-by STS Tool
+# Tender-Management-System_Using_JDBC-with DAO pattern
 
 Project Type : 
 ------------------------------------------------------
