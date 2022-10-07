@@ -12,6 +12,8 @@ public class RegisterAdminCase {
 		
 		Scanner sc = new Scanner(System.in);
 		
+		System.out.println("Welcome to Admin Signup!\n");
+		
 		System.out.println("Enter Admin Id:");
 		int id = sc.nextInt();
 		
@@ -42,6 +44,8 @@ public class RegisterAdminCase {
 		System.out.println(result);
 		
 		Multicases.main(args);
+		
+		sc.close();
 	}
 
 }
