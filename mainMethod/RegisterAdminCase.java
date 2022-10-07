@@ -41,7 +41,7 @@ public class RegisterAdminCase {
 		
 		System.out.println(result);
 		
-
+		Multicases.main(args);
 	}
 
 }
