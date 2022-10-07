@@ -277,8 +277,8 @@ public class Multicases {
 					try {
 						List<VendorTenderAssignedFullDetails> list = dao7.viewAssignedDetails(vendor_id);
 						
-						System.out.println(" \nFull details of Assigned tender to a vendor: ");
-						System.out.println("==============================================");
+						System.out.println(" \nFull details of Assigned tender to a vendor as per T&C: ");
+						System.out.println("==========================================================");
 						
 						list.forEach(s -> {
 							
