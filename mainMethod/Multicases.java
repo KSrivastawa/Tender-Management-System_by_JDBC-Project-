@@ -47,7 +47,7 @@ public class Multicases {
 		case 1:
 			RegisterAdminCase.main(args);
 			
-			Multicases.main(args);
+			break;
 		case 2:
 			System.out.println("Welcome to Admin login\n");
 			
